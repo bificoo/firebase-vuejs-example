@@ -1,6 +1,15 @@
 <template>
   <div id="app">
     <h1>Firebase + Vue.js example</h1>
+    <div class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="name" v-model="newUser.name">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="email" v-model="newUser.email">
+      </div>
+      <button type="button" class="btn btn-success" v-on:click="addUser(user)">Add</button>
+    </div>
   </div>
 </template>
 
@@ -16,6 +25,8 @@
   }
   firebase.initializeApp(config)
 
+  usersRef = firebase.database().ref('users')
+
   module.exports =
     data: () ->
       return {
@@ -24,6 +35,13 @@
           email: ''
         }
       }
+    methods: {
+      addUser: () ->
+        usersRef.push(this.newUser)
+        this.newUser.name = ''
+        this.newUser.email = ''
+        return
+    }
 </script>
 
 <style src="bootstrap/dist/css/bootstrap.css"></style>
