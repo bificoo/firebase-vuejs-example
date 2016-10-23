@@ -10,6 +10,12 @@
       </div>
       <button type="button" class="btn btn-success" v-on:click="addUser(user)">Add</button>
     </div>
+    <h2>User List</h2>
+    <ul v-for="user in users" :key="user['.key']">
+      <li>
+        {{ user | json }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -35,6 +41,8 @@
           email: ''
         }
       }
+    firebase:
+      users: usersRef
     methods: {
       addUser: () ->
         usersRef.push(this.newUser)
