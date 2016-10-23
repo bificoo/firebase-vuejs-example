@@ -14,6 +14,7 @@
     <ul v-for="user in users" :key="user['.key']">
       <li>
         {{ user | json }}
+        <button class="btn btn-danger" v-on:click="removeUser(user)">Delete</button>
       </li>
     </ul>
   </div>
@@ -48,6 +49,9 @@
         usersRef.push(this.newUser)
         this.newUser.name = ''
         this.newUser.email = ''
+        return
+      removeUser: (user) ->
+        usersRef.child(user['.key']).remove()
         return
     }
 </script>
