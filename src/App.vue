@@ -15,6 +15,7 @@
       <li>
         {{ user | json }}
         <button class="btn btn-success" v-on:click="updateUser(user)">Update</button>
+        <button class="btn btn-success" v-on:click="setUser(user)">Set</button>
         <button class="btn btn-danger" v-on:click="removeUser(user)">Delete</button>
       </li>
     </ul>
@@ -54,6 +55,11 @@
       updateUser: (user) ->
         usersRef.child(user['.key']).update {
           name: 'peggy'
+        }
+        return
+      setUser: (user) ->
+        usersRef.child(user['.key']).set {
+          name: 'peggy shih'
         }
         return
       removeUser: (user) ->
